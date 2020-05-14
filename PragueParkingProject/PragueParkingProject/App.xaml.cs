@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PragueParkingProject.Views;
+using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -18,7 +19,7 @@ namespace PragueParkingProject
         {
             InitializeComponent();
 
-            MainPage = new MainPage();
+            MainPage = new NavigationPage(new RegNewCustomer());
             FilePath = filePath;
         }
 
