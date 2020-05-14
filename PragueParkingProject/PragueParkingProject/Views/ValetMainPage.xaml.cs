@@ -10,9 +10,9 @@ using Xamarin.Forms.Xaml;
 namespace PragueParkingProject.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class SecondMainPage : ContentPage
+    public partial class ValetMainPage : ContentPage
     {
-        public SecondMainPage()
+        public ValetMainPage()
         {
             InitializeComponent();
         }

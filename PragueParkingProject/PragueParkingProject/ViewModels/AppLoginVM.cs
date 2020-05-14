@@ -7,6 +7,7 @@ using PragueParkingProject.Models;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using System.ComponentModel;
+using PragueParkingProject.Services;
 
 namespace PragueParkingProject.ViewModels
 {
@@ -41,13 +42,22 @@ namespace PragueParkingProject.ViewModels
 		{
 			SubmitCommand = new Command(OnSubmit);
 		}
-
+		MockStaff mockstaff = new MockStaff();
 		public void OnSubmit()
 		{
-			if (username == "Andre" && password == "Pontes")
+			if (username == mockstaff.staffValet.FirstName  && password == mockstaff.staffValet.LastName)
 			{
-				App.Current.MainPage.DisplayAlert("YES", "Login Success", "ok");
-				App.Current.MainPage.Navigation.PushAsync(new SecondMainPage());
+				App.Current.MainPage.DisplayAlert("Success", "Logging in as Valet", "OK");
+				App.Current.MainPage.Navigation.PushAsync(new ValetMainPage());
+				mockstaff.staffValet.IsWorking = true;
+				return;
+			}
+			if (username == mockstaff.staffReception.FirstName && password == mockstaff.staffReception.LastName)
+			{
+				App.Current.MainPage.DisplayAlert("Success", "Logging in as Reception", "OK");
+				App.Current.MainPage.Navigation.PushAsync(new ReceptionMainPage());
+				mockstaff.staffReception.IsWorking = true;
+				return;
 			}
 			else
 			{
