@@ -16,5 +16,20 @@ namespace PragueParkingProject.Views
         {
             InitializeComponent();
         }
+
+        private void MyOrdersButton_Clicked(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ActiveordersButton_Clicked(object sender, EventArgs e)
+        {
+
+        }
+
+        private void LogOutButton_Clicked(object sender, EventArgs e)
+        {
+
+        }
     }
 }

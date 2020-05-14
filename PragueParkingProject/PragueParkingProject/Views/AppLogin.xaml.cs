@@ -19,9 +19,6 @@ namespace PragueParkingProject.Views
         public AppLogin()
         {
             InitializeComponent();
-         
         }
-
-
     }
 }
