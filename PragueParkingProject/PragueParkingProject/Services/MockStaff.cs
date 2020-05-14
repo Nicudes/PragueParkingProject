@@ -5,9 +5,10 @@ using System.Text;
 
 namespace PragueParkingProject.Services
 {
-    public class MockStaff
+   public class MockStaff
     {
-        Staff staffValet = new Staff()
+       
+      public  Staff staffValet = new Staff()
         {
             FirstName = "Rodrigo",
             Id = 1001,
@@ -15,13 +16,15 @@ namespace PragueParkingProject.Services
             IsWorking = false
         };
 
-        Staff staffReception = new Staff()
+      public   Staff staffReception = new Staff()
         {
             FirstName = "Gunilla",
             Id = 1002,
             LastName = "Hope",
             IsWorking = true
         };
-
-    }
+    };
+            
+            
+    
 }

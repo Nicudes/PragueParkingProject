@@ -1,44 +1,69 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
- 
+using Xamarin.Forms;
+using PragueParkingProject.Views;
+using PragueParkingProject.Models;
+using System.Collections.ObjectModel;
+using System.Windows.Input;
+using System.ComponentModel;
+using PragueParkingProject.Services;
 
 namespace PragueParkingProject.ViewModels
 {
-    public class AppLoginVM
+    public class AppLoginVM :INotifyPropertyChanged
     {
-		private string firstName;
+		public event PropertyChangedEventHandler PropertyChanged;
 
-		public string FirstName
+		private string username;
+
+		public string Username
 		{
-			get { return firstName; }
-			set { firstName = value; }
+			get { return username; }
+			set { username = value;
+				PropertyChanged(this, new PropertyChangedEventArgs("Username"));
+			}
 		}
 
-		private int id;
+		private string password;
 
-		public int Id
+		
+
+		public string Password
 		{
-			get { return id; }
-			set { id = value; }
+			get { return password; }
+			set { password = value;
+				PropertyChanged(this, new PropertyChangedEventArgs("Password"));
+			}
 		}
 
-		private string lastName;
-
-		public string LastName
+		public ICommand SubmitCommand {get; set; }
+		public AppLoginVM()
 		{
-			get { return lastName; }
-			set { lastName = value; }
+			SubmitCommand = new Command(OnSubmit);
 		}
-
-		private bool isWorking;
-
-		public bool IsWorking
+		MockStaff mockstaff = new MockStaff();
+		public void OnSubmit()
 		{
-			get { return isWorking; }
-			set { isWorking = value; }
+			if (username == mockstaff.staffValet.FirstName  && password == mockstaff.staffValet.LastName)
+			{
+				App.Current.MainPage.DisplayAlert("Success", "Logging in as Valet", "OK");
+				App.Current.MainPage.Navigation.PushAsync(new ValetMainPage());
+				mockstaff.staffValet.IsWorking = true;
+				return;
+			}
+			if (username == mockstaff.staffReception.FirstName && password == mockstaff.staffReception.LastName)
+			{
+				App.Current.MainPage.DisplayAlert("Success", "Logging in as Reception", "OK");
+				App.Current.MainPage.Navigation.PushAsync(new ReceptionMainPage());
+				mockstaff.staffReception.IsWorking = true;
+				return;
+			}
+			else
+			{
+			 App.Current.MainPage.DisplayAlert("Error", "Invalid login", "ok");
+			}
 		}
-
 
 	}
 }
