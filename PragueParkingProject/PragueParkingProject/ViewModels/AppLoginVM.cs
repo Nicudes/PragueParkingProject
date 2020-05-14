@@ -21,7 +21,7 @@ namespace PragueParkingProject.ViewModels
 		{
 			get { return username; }
 			set { username = value;
-				PropertyChanged(this, new PropertyChangedEventArgs("Username"));
+				PropertyChanged(this, new PropertyChangedEventArgs("Username")); //För att rutan ska reagera när du skriver in något 
 			}
 		}
 
@@ -42,27 +42,69 @@ namespace PragueParkingProject.ViewModels
 		{
 			SubmitCommand = new Command(OnSubmit);
 		}
-		MockStaff mockstaff = new MockStaff();
-		public void OnSubmit()
+
+
+		public Staff currentStaff = new Staff() // För att kolla vilken person som jobbar just nu----Kanske kan lägga någon annan stans
 		{
-			if (username == mockstaff.staffValet.FirstName  && password == mockstaff.staffValet.LastName)
+			FirstName = "",
+			LastName = "",
+			Id = 0,
+			IsWorking = false,
+			Stafftype = ""
+			
+		};
+
+
+		MockStaff mockstaff = new MockStaff(); // Hämtar mockstaff
+
+		bool isAuthenticated = false; // för att hantera utloggning sen möjligtvis
+
+		public void OnSubmit() // När vi trycker login så körs detta
+		{
+			foreach (var staff in mockstaff.allStaff) // Loopar igenom allStaff listan som skapats i mockstaff
 			{
-				App.Current.MainPage.DisplayAlert("Success", "Logging in as Valet", "OK");
-				App.Current.MainPage.Navigation.PushAsync(new ValetMainPage());
-				mockstaff.staffValet.IsWorking = true;
-				return;
+				if (username == staff.FirstName && password == staff.LastName) // om den hittar någon som matchar så gå den in här
+				{
+					if (staff.Stafftype == "Valet") 
+					{
+						App.Current.MainPage.DisplayAlert("Success", "Logging in as Valet", "OK");
+						App.Current.MainPage.Navigation.PushAsync(new ValetMainPage());
+						staff.IsWorking = true;
+						isAuthenticated = true;
+
+						//sätter currentstaff för att hantera orders osv senare
+						currentStaff.FirstName = staff.FirstName;
+						currentStaff.LastName = staff.LastName;
+						currentStaff.Id = staff.Id;
+						currentStaff.IsWorking = staff.IsWorking;
+						currentStaff.Stafftype = staff.Stafftype;
+
+						return;
+					}
+					if (staff.Stafftype == "Reception")
+					{
+						App.Current.MainPage.DisplayAlert("Success", "Logging in as Reception", "OK");
+						App.Current.MainPage.Navigation.PushAsync(new ReceptionMainPage());
+						staff.IsWorking = true;
+						isAuthenticated = true;
+
+						currentStaff.FirstName = staff.FirstName;
+						currentStaff.LastName = staff.LastName;
+						currentStaff.Id = staff.Id;
+						currentStaff.IsWorking = staff.IsWorking;
+						currentStaff.Stafftype = staff.Stafftype;
+
+						return;
+					}
+				}
+
 			}
-			if (username == mockstaff.staffReception.FirstName && password == mockstaff.staffReception.LastName)
+			if (isAuthenticated == false)
 			{
-				App.Current.MainPage.DisplayAlert("Success", "Logging in as Reception", "OK");
-				App.Current.MainPage.Navigation.PushAsync(new ReceptionMainPage());
-				mockstaff.staffReception.IsWorking = true;
-				return;
+				App.Current.MainPage.DisplayAlert("Error", "Could not find a user with that login", "OK");
+
 			}
-			else
-			{
-			 App.Current.MainPage.DisplayAlert("Error", "Invalid login", "ok");
-			}
+
 		}
 
 	}
