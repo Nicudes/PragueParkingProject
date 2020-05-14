@@ -3,20 +3,26 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:PragueParkingProject.ViewModels"
              mc:Ignorable="d"
              x:Class="PragueParkingProject.Views.AppLogin">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <vm:AppLoginVM x:Key="vm"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.Content>
         
-        <StackLayout>
+        <StackLayout BindingContext="{StaticResource vm}">
             <Label Text="Praque Parkin"/>
 
             
 
             <Label Text="Username"/>
-            <Entry x:Name="AppUserName" Placeholder="Enter your username"/>
+            <Entry x:Name="Username" Text="{Binding Username}" Placeholder="Enter your username"/>
 
             <Label Text="Password"/>
-            <Entry x:Name="AppPassword" Placeholder="Enter your password"/>
+            <Entry x:Name="Password" Text="{Binding Password}" Placeholder="Enter your password"/>
 
             <Label Text="City/station"/>
 
@@ -29,9 +35,8 @@
                 </Grid.ColumnDefinitions>
 
 
-                <Button x:Name="Login" Clicked="LoginButton_Clicked"
-                        Grid.Column="1" />
-                
+                <Button Command="{Binding SubmitCommand}" Text="Login"/>
+
             </Grid>
 
 

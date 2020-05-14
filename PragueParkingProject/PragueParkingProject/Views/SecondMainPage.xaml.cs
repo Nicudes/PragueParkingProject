@@ -1,5 +1,4 @@
-﻿using PragueParkingProject.ViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,17 +10,11 @@ using Xamarin.Forms.Xaml;
 namespace PragueParkingProject.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class AppLogin : ContentPage
+    public partial class SecondMainPage : ContentPage
     {
-
-   
-
-        public AppLogin()
+        public SecondMainPage()
         {
             InitializeComponent();
-         
         }
-
-
     }
 }
