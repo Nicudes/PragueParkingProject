@@ -2,16 +2,23 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:vm="clr-namespace:PragueParkingProject.ViewModels"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:PragueParkingProject.ViewModels"
              mc:Ignorable="d"
              x:Class="PragueParkingProject.Views.ValetMainPage">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <vm:AppLoginVM x:Key="vm"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.Content>
-        <Grid BackgroundColor="DarkSlateGray">
+        <Grid BackgroundColor="LightBlue">
             <Grid.RowDefinitions>
                 <RowDefinition Height="40"/>
                 <RowDefinition Height="40"/>
                 <RowDefinition Height="*"/>
-                <RowDefinition Height="40"/>
+                <RowDefinition Height="50"/>
                 <RowDefinition Height="10"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
@@ -19,10 +26,13 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Label Text="Prague Parking"
-                   FontAttributes="Bold" TextColor="White"
+                   FontAttributes="Bold" TextColor="Black"
                    Margin="7"
                    FontSize="20"
                    HorizontalOptions="Center" Grid.Column="0"/>
+            <Label Text="{Binding UserName}" Grid.Column="1" HorizontalTextAlignment="End"
+                   VerticalTextAlignment="Center" TextColor="Black"
+                   Margin="10,7,15,0" FontSize="12"/>
             <Button Text="Active Orders"
                     BackgroundColor="LightGreen"
                     Margin="15,0,0,0"
@@ -46,10 +56,10 @@
                     Grid.Column="1" 
                     Margin="70,10,0,0"
                     HorizontalOptions="Center"
-                    BackgroundColor="DarkGray"
+                    BackgroundColor="#2C2D2F"
                     x:Name="LogOutButton" Clicked="LogOutButton_Clicked"
-                    FontAttributes="Bold" FontSize="10" TextColor="Black"
-                    HeightRequest="40"
+                    FontAttributes="Bold" FontSize="15" TextColor="White"
+                    HeightRequest="50"
                     Grid.Row="3"/>
         </Grid>
     </ContentPage.Content>
