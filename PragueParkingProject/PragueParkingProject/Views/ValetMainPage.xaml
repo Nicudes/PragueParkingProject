@@ -4,20 +4,77 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:vm="clr-namespace:PragueParkingProject.ViewModels"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm1="clr-namespace:PragueParkingProject.Services"
              mc:Ignorable="d"
              x:Class="PragueParkingProject.Views.ValetMainPage">
+
     <ContentPage.Resources>
         <ResourceDictionary>
             <vm:AppLoginVM x:Key="vm"/>
+            <vm1:MockStaff x:Key="vm1"/>
         </ResourceDictionary>
     </ContentPage.Resources>
+    
+    <ContentPage.Content>
+        <Grid BackgroundColor="LightBlue">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="80"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="10"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <StackLayout BindingContext="{StaticResource vm}">
+                <Label Text="Prague Parking"
+                   FontAttributes="Bold" TextColor="Black"
+                   Margin="7"
+                   FontSize="20"
+                   HorizontalOptions="Center" Grid.Column="0"/>
+                <Label Text="{Binding Username}" Grid.Column="1" HorizontalTextAlignment="End"
+                   VerticalTextAlignment="Center" TextColor="Black"
+                   Margin="10,7,15,0" FontSize="12"/>
+            </StackLayout>
 
-    <StackLayout BindingContext="{StaticResource vm}">
+            <Button Text="Active Orders"
+                    BackgroundColor="LightGreen"
+                    Margin="15,0,0,0"
+                    Grid.Column="0" Grid.Row="1"
+                    x:Name="ActiveordersButton" Clicked="ActiveordersButton_Clicked"/>
+            <Button Text="My Orders"
+                    BackgroundColor="LightCoral"
+                    Margin="0,0,15,0"
+                    Grid.Column="1" Grid.Row="1"
+                    x:Name="MyOrdersButton" Clicked="MyOrdersButton_Clicked"/>
 
+            <Frame HeightRequest="400" Grid.Row="2" Grid.ColumnSpan="2" Margin="15,0,15,0" BackgroundColor="White">
+                <ListView x:Name="AllStaffListView" BindingContext="{StaticResource vm1}" ItemsSource="{Binding allStaff}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <TextCell Text="{Binding FirstName}" TextColor="Teal"/>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                
+                <!--<CollectionView ItemsSource="{Binding Orders}">
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout Orientation="Vertical" Span="2"/>
+                    </CollectionView.ItemsLayout>
+                </CollectionView>-->
+            </Frame>
 
-    </StackLayout>
-
-
-
-
+            <Button Text="Log Out" 
+                    Grid.Column="1" 
+                    Margin="70,10,0,0"
+                    HorizontalOptions="Center"
+                    BackgroundColor="#2C2D2F"
+                    x:Name="LogOutButton" Clicked="LogOutButton_Clicked"
+                    FontAttributes="Bold" FontSize="15" TextColor="White"
+                    HeightRequest="50"
+                    Grid.Row="3"/>
+        </Grid>
+    </ContentPage.Content>
 </ContentPage>
