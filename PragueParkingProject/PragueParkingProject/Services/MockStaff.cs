@@ -1,6 +1,8 @@
 ﻿using PragueParkingProject.Models;
+using SQLite;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace PragueParkingProject.Services
@@ -21,25 +23,25 @@ namespace PragueParkingProject.Services
                 },
                 new Staff
                 {
-                        Id = 1102,
+                    Id = 1102,
                     FirstName = "Huy",
                     LastName = "Tran",
                     Stafftype = "Valet",
                     IsWorking = false
 
                 },
-                       new Staff
+                new Staff
                 {
-                        Id = 1103,
+                    Id = 1103,
                     FirstName = "Mattis",
                     LastName = "Vainikainen",
                     Stafftype = "Reception",
                     IsWorking = false
 
                 },
-                              new Staff
+                new Staff
                 {
-                        Id = 1104,
+                    Id = 1104,
                     FirstName = "Daniel",
                     LastName = "Söderberg",
                     Stafftype = "Reception",
@@ -48,6 +50,40 @@ namespace PragueParkingProject.Services
                 }
 
         };
+
+
+        public void DeleteStaff()
+        {
+            using (SQLiteConnection conn = new SQLiteConnection(App.FilePath))
+            {
+                conn.DropTable<Staff>();
+            }
+        }
+
+        public void CreateStaff()
+        {
+            using(SQLiteConnection conn = new SQLiteConnection(App.FilePath))
+            {
+                conn.CreateTable<Staff>();
+                foreach (var staff in allStaff)
+                {
+                    if (allStaff.Any(a => a.Id == staff.Id))
+                    {
+                        break;
+
+                    }
+                    else
+                    {
+                        int rowsAdded = conn.Insert(staff);
+                        Console.WriteLine($"Rows added: {rowsAdded}");
+                    }
+                    
+
+                    
+                }
+            }
+
+        }
     };
             
             
