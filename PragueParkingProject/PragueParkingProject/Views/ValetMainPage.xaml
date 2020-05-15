@@ -4,18 +4,13 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:vm="clr-namespace:PragueParkingProject.ViewModels"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:vm="clr-namespace:PragueParkingProject.ViewModels"
              mc:Ignorable="d"
              x:Class="PragueParkingProject.Views.ValetMainPage">
-    <ContentPage.Resources>
-        <ResourceDictionary>
-            <vm:AppLoginVM x:Key="vm"/>
-        </ResourceDictionary>
-    </ContentPage.Resources>
+    
     <ContentPage.Content>
         <Grid BackgroundColor="LightBlue">
             <Grid.RowDefinitions>
-                <RowDefinition Height="40"/>
+                <RowDefinition Height="80"/>
                 <RowDefinition Height="40"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="50"/>
