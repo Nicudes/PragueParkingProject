@@ -19,7 +19,7 @@ namespace PragueParkingProject
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage(new RegNewCustomer());
+            MainPage = new NavigationPage(new AppLogin());
             FilePath = filePath;
         }
 

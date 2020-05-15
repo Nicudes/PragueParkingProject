@@ -5,23 +5,51 @@ using System.Text;
 
 namespace PragueParkingProject.Services
 {
-    public class MockStaff
+   public class MockStaff
     {
-        Staff staffValet = new Staff()
-        {
-            FirstName = "Rodrigo",
-            Id = 1001,
-            LastName = "Dude",
-            IsWorking = false
-        };
 
-        Staff staffReception = new Staff()
-        {
-            FirstName = "Gunilla",
-            Id = 1002,
-            LastName = "Hope",
-            IsWorking = true
-        };
 
-    }
+        public List<Staff> allStaff = new List<Staff>
+            {
+                new Staff
+                {
+                    Id = 1101,
+                    FirstName = "Andre",
+                    LastName = "Pontes",
+                    Stafftype = "Valet",
+                    IsWorking = false
+                },
+                new Staff
+                {
+                        Id = 1102,
+                    FirstName = "Huy",
+                    LastName = "Tran",
+                    Stafftype = "Valet",
+                    IsWorking = false
+
+                },
+                       new Staff
+                {
+                        Id = 1103,
+                    FirstName = "Mattis",
+                    LastName = "Vainikainen",
+                    Stafftype = "Reception",
+                    IsWorking = false
+
+                },
+                              new Staff
+                {
+                        Id = 1104,
+                    FirstName = "Daniel",
+                    LastName = "Söderberg",
+                    Stafftype = "Reception",
+                    IsWorking = false
+
+                }
+
+        };
+    };
+            
+            
+    
 }
